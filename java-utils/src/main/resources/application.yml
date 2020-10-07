@@ -1,0 +1,62 @@
+server:
+  port: 8081
+spring:
+  profiles:
+    active: test
+  application:
+    name: utils
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test_db?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&&serverTimezone=GMT%2B8
+    username: root
+    password: root
+    filters: stat,wall
+    druid:
+      initial-size: 10
+      min-idle: 10
+      max-active: 30
+      test-on-borrow: true
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+  security:
+    user:
+      name: "admin"
+      password: "admin"
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+
+logging:
+  level:
+    root: INFO
+    org.apache.ibatis: info
+    java-utils: debug
+  config: classpath:logback.xml
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+
+token:
+  secretKey: 9ac93552c203dde2a133a0988faa05b9
+  ttl: 7
+location:
+  ttl: 7
+# 读取这里的白名单在网关过滤掉url
+  whites:
+    - /user/login
+    - /admin/login
+    - /doc.html
+    - bycdao-ui
+    - swagger-resources
+
+swagger:
+  enable: true
