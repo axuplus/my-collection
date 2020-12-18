@@ -1,5 +1,6 @@
 package com.utils.util.interceptor;
 
+import com.utils.annotation.Permission;
 import com.utils.util.PublicUtil;
 import com.utils.util.ThreadLocalMap;
 import com.utils.util.constant.GlobalConstant;
@@ -13,13 +14,16 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.lang.reflect.Method;
 
 
 @Slf4j
@@ -121,8 +125,20 @@ public class TokenInterceptor implements HandlerInterceptor {
             loginUser.setCity(userLocationDto.getCity());
         }
         log.info("<== preHandle - 权限拦截器.  loginUser={}", loginUser);
+        Permission allowedDo = isAllowedDo(handler);
+        log.warn("allowedDo {}", allowedDo);
+        // 权限逻辑
         ThreadLocalMap.put(GlobalConstant.Sys.TOKEN_AUTH_DTO, loginUser);
         return true;
+    }
+
+    /**
+     * 验证注解
+     */
+    private Permission isAllowedDo(Object handler) {
+        HandlerMethod handlerMethod = (HandlerMethod) handler;
+        Method method = handlerMethod.getMethod();
+        return AnnotationUtils.findAnnotation(method, Permission.class);
     }
 
     private void handleException(HttpServletResponse res) throws IOException {
