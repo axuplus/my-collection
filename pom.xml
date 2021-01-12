@@ -20,6 +20,7 @@
     <modules>
         <module>java-utils</module>
         <module>java-tools</module>
+        <module>java-interview</module>
     </modules>
 
 
