@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8060
 spring:
   profiles:
     active: test
@@ -24,8 +24,9 @@ spring:
       password: "admin"
   redis:
     database: 0
-    host: 127.0.0.1
-    port: 6379
+    host: 183.245.38.243
+    port: 56379
+    password: redis@123456
 
 logging:
   level:
@@ -60,3 +61,14 @@ location:
 
 swagger:
   enable: true
+
+alipay:
+  app_cert_path: /crt/appCertPublicKey_2021001157613961.crt
+  alipay_root_cert_path: /crt/alipayRootCert.crt
+  alipay_cert_path: /crt/alipayCertPublicKey_RSA2.crt
+
+upload-file:
+  imgPath: /images/admin-organization
+  imgUrl: http://vip.amsure.cn:8050/images/admin-organization/
+  imgThumbPath: /images/admin-organization
+  imgThumbUrl: http://vip.amsure.cn:8050/thumb/

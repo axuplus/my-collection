@@ -1,6 +1,6 @@
 package com.utils.util.dto;
 
-import com.utils.login.UacUser;
+import com.utils.tools.login.UacUser;
 import com.utils.util.token.JwtUtil;
 import lombok.Data;
 import lombok.NoArgsConstructor;
