@@ -1,4 +1,4 @@
-package com.utils.util.base;
+package com.collection.utils.util.base;
 
 import com.utils.util.date.DateUtil;
 import com.utils.util.exception.BizException;

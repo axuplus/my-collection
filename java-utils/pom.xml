@@ -6,7 +6,7 @@
     <parent>
         <groupId>my-collection</groupId>
         <artifactId>collection</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
 
 
@@ -17,7 +17,7 @@
     <packaging>jar</packaging>
 
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>11</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
@@ -25,20 +25,17 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.5.2</version>
         </dependency>
         <dependency>
-            <groupId>com.fasterxml.jackson.datatype</groupId>
-            <artifactId>jackson-datatype-jsr310</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
-            <version>2.2.2.RELEASE</version>
+            <groupId>tk.mybatis</groupId>
+            <artifactId>mapper</artifactId>
+            <version>3.5.2</version>
         </dependency>
         <dependency>
             <groupId>com.aliyun.oss</groupId>
@@ -50,88 +47,74 @@
             <artifactId>jave</artifactId>
             <version>1.0.2</version>
             <scope>system</scope>
-            <systemPath>C:/Users/14256/Desktop/myself-project/my-collection/java-utils/src/main/java/com/utils/util/video/jave-1.0.2.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-test</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <systemPath>
+                C:/Users/14256/Desktop/myself-project/my-collection/java-utils/src/main/java/com/utils/util/video/jave-1.0.2.jar
+            </systemPath>
         </dependency>
         <dependency>
             <groupId>org.jdom</groupId>
             <artifactId>jdom2</artifactId>
-            <version>2.0.6</version>
         </dependency>
         <dependency>
             <groupId>com.alipay.sdk</groupId>
             <artifactId>alipay-sdk-java</artifactId>
             <version>4.9.124.ALL</version>
         </dependency>
+        <dependency>
+            <groupId>net.coobird</groupId>
+            <artifactId>thumbnailator</artifactId>
+            <version>0.4.8</version>
+        </dependency>
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>application.yml</exclude>
-                        <exclude>logback.xml</exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <profileActive>dev</profileActive>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+    </profiles>
 
 
-<!--    <build>-->
-<!--        <plugins>-->
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-jar-plugin</artifactId>-->
-<!--                <configuration>-->
-<!--                    <excludes>-->
-<!--                        <exclude>application.yml</exclude>-->
-<!--                        <exclude>logback.xml</exclude>-->
-<!--                    </excludes>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
-<!--            <plugin>-->
-<!--                <groupId>org.springframework.boot</groupId>-->
-<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
-<!--                <configuration>-->
-<!--                    <fork>true</fork>-->
-<!--                    &lt;!&ndash;生成可依赖的jar，spring-boot-maven-plugin插件默认是生成直接运行的jar(不可依赖)，加上exec再生成一个可依赖的jar-->
-<!--                    官方告诉我们，你如果不想移代码，好吧，我这样来给你解决，给你打两个jar包，一个用来直接执-->
-<!--                      行，一个用来依赖。于是，你需要指定一个属性classifier，这个属性为可执行jar包的名字后缀。比-->
-<!--                      如我设置<classifier>exec</classifier>,那么我会得到两个jar：xxx.jar和xxx-exec.jar-->
-<!--                    &ndash;&gt;-->
-<!--                    <classifier>exec</classifier>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-compiler-plugin</artifactId>-->
-<!--                <configuration>-->
-<!--                    <source>1.8</source>-->
-<!--                    <target>1.8</target>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
-<!--        </plugins>-->
-<!--    </build>-->
+    <!--    <build>-->
+    <!--        <plugins>-->
+    <!--            <plugin>-->
+    <!--                <groupId>org.apache.maven.plugins</groupId>-->
+    <!--                <artifactId>maven-jar-plugin</artifactId>-->
+    <!--                <configuration>-->
+    <!--                    <excludes>-->
+    <!--                        <exclude>application.yml</exclude>-->
+    <!--                        <exclude>logback.xml</exclude>-->
+    <!--                    </excludes>-->
+    <!--                </configuration>-->
+    <!--            </plugin>-->
+    <!--            <plugin>-->
+    <!--                <groupId>org.springframework.boot</groupId>-->
+    <!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
+    <!--                <configuration>-->
+    <!--                    <fork>true</fork>-->
+    <!--                    &lt;!&ndash;生成可依赖的jar，spring-boot-maven-plugin插件默认是生成直接运行的jar(不可依赖)，加上exec再生成一个可依赖的jar-->
+    <!--                    官方告诉我们，你如果不想移代码，好吧，我这样来给你解决，给你打两个jar包，一个用来直接执-->
+    <!--                      行，一个用来依赖。于是，你需要指定一个属性classifier，这个属性为可执行jar包的名字后缀。比-->
+    <!--                      如我设置<classifier>exec</classifier>,那么我会得到两个jar：xxx.jar和xxx-exec.jar-->
+    <!--                    &ndash;&gt;-->
+    <!--                    <classifier>exec</classifier>-->
+    <!--                </configuration>-->
+    <!--            </plugin>-->
+    <!--            <plugin>-->
+    <!--                <groupId>org.apache.maven.plugins</groupId>-->
+    <!--                <artifactId>maven-compiler-plugin</artifactId>-->
+    <!--                <configuration>-->
+    <!--                    <source>1.8</source>-->
+    <!--                    <target>1.8</target>-->
+    <!--                </configuration>-->
+    <!--            </plugin>-->
+    <!--        </plugins>-->
+    <!--    </build>-->
 
 
 </project>

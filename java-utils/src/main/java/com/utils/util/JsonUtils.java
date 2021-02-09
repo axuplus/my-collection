@@ -5,7 +5,7 @@ import com.alibaba.fastjson.parser.ParserConfig;
 import com.alibaba.fastjson.serializer.SerializeConfig;
 
 import java.util.List;
-
+@SuppressWarnings({"all"})
 public class JsonUtils {
 
     public static Object toJSON(Object o) {

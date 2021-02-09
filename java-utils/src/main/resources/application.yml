@@ -1,10 +1,13 @@
 server:
   port: 8060
+  undertow:
+    #是否分配的直接内存(NIO直接分配的堆外内存)
+    direct-buffers: true
 spring:
   profiles:
-    active: test
+    active: '@profileActive@'
   application:
-    name: utils
+    name:  '@pom.artifactId@'
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/test_db?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&&serverTimezone=GMT%2B8
@@ -49,18 +52,16 @@ pagehelper:
 token:
   secretKey: 9ac93552c203dde2a133a0988faa05b9
   ttl: 7
-location:
-  ttl: 7
+
+
 # 读取这里的白名单在网关过滤掉url
-  whites:
+url:
+  white-list:
     - /user/login
     - /admin/login
     - /doc.html
     - bycdao-ui
     - swagger-resources
-
-swagger:
-  enable: true
 
 alipay:
   app_cert_path: /crt/appCertPublicKey_2021001157613961.crt
@@ -72,3 +73,12 @@ upload-file:
   imgUrl: http://vip.amsure.cn:8050/images/admin-organization/
   imgThumbPath: /images/admin-organization
   imgThumbUrl: http://vip.amsure.cn:8050/thumb/
+
+
+swagger:
+  base_package: com.ddcx.app.provider.uac.web
+  enable: true
+  title: Utils
+  server_url: http://localhost/utils/uac/
+  version: 1.0
+  description: Utils

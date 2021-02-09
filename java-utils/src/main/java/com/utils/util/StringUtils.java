@@ -11,36 +11,36 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-
+@SuppressWarnings({"all"})
 public class StringUtils {
 
 
 
-	
+
 	private static ThreadLocal<StringCache> cacheLocal = new ThreadLocal<StringCache>() {
 		@Override
 		protected StringCache initialValue() {
 			return new StringCache();
 		}
 	};
-	
+
 	public static final String DEFAULT_EMPTY_STRING = "";
 
     public static final String DEFAULT_NULL_STRING = "null";
-    
+
     public static final String DOT = ".";
-    
+
 	public static final String SLASH = "/";
-	
+
 	public static final String EMPTY = "";
-	
+
 	public static final String UNDERLINE = "_";
-    
+
 	private static final char[] DIGITS_LOWER = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
 
 	private static long strOffset;
 
-	
+
 	/**
 	 * 字符串是否为空 空的定义如下： <br/>
 	 * 1、为null <br/>
@@ -52,7 +52,7 @@ public class StringUtils {
 	public static boolean isBlank(String str) {
 		return str == null || str.trim().length() == 0;
 	}
-	
+
 	/**
 	 * 是否包含空字符串
 	 * @param strs 字符串列表
@@ -69,7 +69,7 @@ public class StringUtils {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * 检测指定的src是否不为空。不为空返回true
 	 * @param src
@@ -90,19 +90,19 @@ public class StringUtils {
 	public static boolean isEmpty(String str) {
 		return (str == null || "".equals(str) || str.length() == 0);
 	}
-	
+
 	/**
 	 * 字符串是否为非空白 空白的定义如下： <br>
 	 * 1、不为null <br>
 	 * 2、不为""<br>
-	 * 
+	 *
 	 * @param str 被检测的字符串
 	 * @return 是否为非空
 	 */
 	public static boolean isNotEmpty(String str) {
 		return false == isEmpty(str);
 	}
-	
+
 	/**
 	 * 将byte数组以16进制的形式输出
 	 * @param src
@@ -118,7 +118,7 @@ public class StringUtils {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param str
 	 * @return
 	 */
@@ -132,7 +132,7 @@ public class StringUtils {
             .append(str.substring(1))
             .toString();
     }
-	
+
 	/**
 	 * 将hex字符的字符串转变byte数组
 	 * @param hexStr
@@ -141,7 +141,7 @@ public class StringUtils {
 	public static byte[] hexStringToBytes(String hexStr) {
 		return hexCharsToBytes(hexStr.toLowerCase().toCharArray());
 	}
-	
+
 	/**
 	 * 将hex字符的char数组转变byte数组
 	 * @param hexChars
@@ -160,9 +160,9 @@ public class StringUtils {
 		}
 		return result;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param c
 	 * @return
 	 */
@@ -175,7 +175,7 @@ public class StringUtils {
 		}
 		throw new RuntimeException("字符" + c + "不是小写十六进制的字符");
 	}
-	
+
 	/**
 	 * 使用匹配规则检测字符串，如果匹配返回true 匹配规则为，如果有*则认为可以是任意字符，从前到后匹配
 	 * @param src 需要检测的字符串
@@ -214,7 +214,7 @@ public class StringUtils {
 		}
 	}
 
-	
+
 	/**
 	 * 从char数组中确定大括号的位置，如果不存在返回-1
 	 * @param array
@@ -230,7 +230,7 @@ public class StringUtils {
 		}
 		return -1;
 	}
-	
+
 	/**
 	 * 得到字符串的内存字节表示
 	 * @param str
@@ -249,7 +249,7 @@ public class StringUtils {
 		}
 		return toHexString(tmp);
 	}
-	
+
 	 /**
      * <p>判断字符串是否有长度(不为null或"")</p>
      * <pre>
@@ -264,7 +264,7 @@ public class StringUtils {
     public static boolean hasLength(String str) {
         return str == null ? false : str.length() > 0;
     }
-    
+
     /**
      * <p>Null-safe 调用String.trim()方法</p>
      * <pre>
@@ -280,7 +280,7 @@ public class StringUtils {
     public static String trim(String str) {
         return str == null ? null : str.trim();
     }
-    
+
     /**
      * <p>Null-safe 调用String.trim()方法</p>
      * <pre>
@@ -296,7 +296,7 @@ public class StringUtils {
     public static String trimAll(String str) {
         return str == null ? null : str.trim().replace(" ", "");
     }
-    
+
     /**
      * <p>对字符串trim操作,当字符串为空值(null、""、" "、"null")时转换为null</p>
      * <pre>
@@ -314,7 +314,7 @@ public class StringUtils {
         String ts = trim(str);
         return isEmpty(ts) ? null : ts;
     }
-    
+
     /**
      * <p>对字符串trim操作,当字符串为空值(null、""、" "、"null")时转换为""</p>
      * <pre>
@@ -331,7 +331,7 @@ public class StringUtils {
     public static String trimToEmpty(String str) {
         return str == null ? DEFAULT_EMPTY_STRING : str.trim();
     }
-    
+
     /**
      * <p>如果字符串为null则将其转换为""</p>
      * <pre>
@@ -346,7 +346,7 @@ public class StringUtils {
     public static String defaultIfNull(String str) {
         return defaultIfNull(str, DEFAULT_EMPTY_STRING);
     }
-    
+
     /**
      * <p>如果字符串为null则将其转换为defaultValue</p>
      * <pre>
@@ -362,7 +362,7 @@ public class StringUtils {
     public static String defaultIfNull(String str, String defaultValue) {
         return str == null ? defaultValue : str;
     }
-    
+
     /**
      * <p>如果字符串为null则将其转换为""</p>
      * <pre>
@@ -377,7 +377,7 @@ public class StringUtils {
     public static String defaultIfEmpty(String str) {
         return defaultIfEmpty(str, DEFAULT_EMPTY_STRING);
     }
-    
+
     /**
      * <p>如果字符串为空值(null、""、" ")则将其转换为defaultValue</p>
      * <pre>
@@ -394,7 +394,7 @@ public class StringUtils {
     public static String defaultIfEmpty(String str, String defaultValue) {
         return isEmpty(str) ? defaultValue : str;
     }
-    
+
     /**
      * <p>判断两个字符串是否相同</p>
      * <pre>
@@ -411,7 +411,7 @@ public class StringUtils {
     public static boolean equals(String str1, String str2) {
         return str1 == null ? str2 == null : str1.equals(str2);
     }
-    
+
     /**
      * <p>判断两个字符串不区分大小写比较是否相同</p>
      * <pre>
@@ -428,7 +428,7 @@ public class StringUtils {
     public static boolean equalsIgnoreCase(String str1, String str2) {
         return str1 == null ? str2 == null : str1.equalsIgnoreCase(str2);
     }
-    
+
     /**
      * <p>判断两个字符串trim之后比较是否相同</p>
      * <pre>
@@ -449,7 +449,7 @@ public class StringUtils {
     	}
         return str1.trim().equals(str2.trim());
     }
-    
+
     /**
      * <p>判断两个字符串trim之后不区分大小写比较是否相同</p>
      * <pre>
@@ -470,7 +470,7 @@ public class StringUtils {
     	}
         return str1.trim().equalsIgnoreCase(str2.trim());
     }
-    
+
     /**
      * <p>分别从目标字符串中的两端剔除需要剔除的字符串stripChars</p>
      * <pre>
@@ -563,7 +563,7 @@ public class StringUtils {
         }
         return str.substring(0, end);
     }
-    
+
     /**
      * <p>在目标字符串targetStr左边补充字符appendChar,使得目标字符串的总长度达到length
      * (注：targetStr为null时返回null)</p>
@@ -627,7 +627,7 @@ public class StringUtils {
         }
         return true;
     }
-    
+
     /**
      * <p>判断字符是否由字母或者数字[a-zA-Z0-9]组成</p>
      * @param str
@@ -645,7 +645,7 @@ public class StringUtils {
         }
         return true;
     }
-    
+
     /**
      * <p>判断字符串是否全由数字组成[0-9]</p>
      * @param str
@@ -663,7 +663,7 @@ public class StringUtils {
         }
         return true;
     }
-    
+
     /**
      * <p>反序返回字符串</p>
      * <pre>
@@ -680,7 +680,7 @@ public class StringUtils {
         }
         return new StringBuilder(str).reverse().toString();
     }
-    
+
     /**
 	 * 字符串是否为空 空的定义如下： <br/>
 	 * 1、为null <br/>
@@ -743,7 +743,7 @@ public class StringUtils {
 		return originalStr;
 	}
 
-	
+
 	/**
 	 * 获得一个随机的字符串
 	 * @param length 字符串的长度
@@ -765,10 +765,10 @@ public class StringUtils {
 	}
 
 
-	
+
 	/**
 	 * 将byte数组转为字符串
-	 * 
+	 *
 	 * @param bytes byte数组
 	 * @param charset 字符集
 	 * @return 字符串
@@ -779,7 +779,7 @@ public class StringUtils {
 
 	/**
 	 * 解码字节码
-	 * 
+	 *
 	 * @param data 字符串
 	 * @param charset 字符集，如果此字段为空，则解码的结果取决于平台
 	 * @return 解码后的字符串
@@ -794,7 +794,7 @@ public class StringUtils {
 		}
 		return new String(data, charset);
 	}
-	
+
 	/**
 	 * 将编码的byteBuffer数据转换为字符串
 	 * @param data 数据
@@ -805,10 +805,10 @@ public class StringUtils {
 		if(data == null) {
 			return null;
 		}
-		
+
 		return str(data, Charset.forName(charset));
 	}
-	
+
 	/**
 	 * 将编码的byteBuffer数据转换为字符串
 	 * @param data 数据
@@ -821,7 +821,7 @@ public class StringUtils {
 		}
 		return charset.decode(data).toString();
 	}
-	
+
 	/**
 	 * 改进JDK subString<br>
 	 * index从0开始计算，最后一个字符为-1<br>
@@ -831,7 +831,7 @@ public class StringUtils {
 	 * example: <br>
 	 * 	abcdefgh 2 3 -> c <br>
 	 * 	abcdefgh 2 -3 -> cde <br>
-	 * 
+	 *
 	 * @param string String
 	 * @param fromIndex 开始的index（包括）
 	 * @param toIndex 结束的index（不包括）
@@ -872,10 +872,10 @@ public class StringUtils {
 		char[] newStrArray = Arrays.copyOfRange(strArray, fromIndex, toIndex);
 		return new String(newStrArray);
 	}
-	
+
 	/**
 	 * 切割前部分
-	 * 
+	 *
 	 * @param string 字符串
 	 * @param toIndex 切割到的位置（不包括）
 	 * @return 切割后的字符串
@@ -886,7 +886,7 @@ public class StringUtils {
 
 	/**
 	 * 切割后部分
-	 * 
+	 *
 	 * @param string 字符串
 	 * @param fromIndex 切割开始的位置（包括）
 	 * @return 切割后的字符串
@@ -898,7 +898,7 @@ public class StringUtils {
 		return sub(string, fromIndex, string.length());
 	}
 
-	
+
 	/**
 	 * 转换基本类型
 	 * @param clazz
@@ -933,7 +933,7 @@ public class StringUtils {
 				return clazz;
 		}
 	}
-	
+
 	/**
 	 * 获得set或get方法对应的标准属性名<br/>
 	 * 例如：setName 返回 name
@@ -946,7 +946,7 @@ public class StringUtils {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * 生成set方法名<br/>
 	 * 例如：name 返回 setName
@@ -956,7 +956,7 @@ public class StringUtils {
 	public static String genSetter(String fieldName){
 		return upperFirstAndAddPre(fieldName, "set");
 	}
-	
+
 	/**
 	 * 生成get方法名
 	 * @param fieldName 属性名
@@ -965,7 +965,7 @@ public class StringUtils {
 	public static String genGetter(String fieldName){
 		return upperFirstAndAddPre(fieldName, "get");
 	}
-	
+
 	/**
 	 * 去掉首部指定长度的字符串并将剩余字符串首字母小写<br/>
 	 * 例如：str=setName, preLength=3 -> return name
@@ -986,7 +986,7 @@ public class StringUtils {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * 原字符串首字母大写并在其首部添加指定字符串
 	 * 例如：str=name, preString=get -> return getName
@@ -1000,7 +1000,7 @@ public class StringUtils {
 		}
 		return preString + Character.toUpperCase(str.charAt(0)) + str.substring(1);
 	}
-	
+
 	/**
 	 * 大写首字母<br>
 	 * 例如：str = name, return Name
@@ -1010,7 +1010,7 @@ public class StringUtils {
 	public static String upperFirst(String str) {
 		return Character.toUpperCase(str.charAt(0)) + str.substring(1);
 	}
-	
+
 	/**
 	 * 小写首字母<br>
 	 * 例如：str = Name, return name
@@ -1020,7 +1020,7 @@ public class StringUtils {
 	public static String lowerFirst(String str) {
 		return Character.toLowerCase(str.charAt(0)) + str.substring(1);
 	}
-	
+
 	/**
 	 * 去掉指定前缀
 	 * @param str 字符串
@@ -1033,7 +1033,7 @@ public class StringUtils {
 		}
 		return str;
 	}
-	
+
 	/**
 	 * 忽略大小写去掉指定前缀
 	 * @param str 字符串
@@ -1046,7 +1046,7 @@ public class StringUtils {
 		}
 		return str;
 	}
-	
+
 	/**
 	 * 去掉指定后缀
 	 * @param str 字符串
@@ -1059,7 +1059,7 @@ public class StringUtils {
 		}
 		return str;
 	}
-	
+
 	/**
 	 * 忽略大小写去掉指定后缀
 	 * @param str 字符串
@@ -1072,7 +1072,7 @@ public class StringUtils {
 		}
 		return str;
 	}
-	
+
 	/**
 	 * 切分字符串<br/>
 	 * a#b#c -> [a,b,c]
@@ -1084,7 +1084,7 @@ public class StringUtils {
 	public static List<String> split(String str, char separator) {
 		return split(str, separator, 0);
 	}
-	
+
 	/**
 	 * 切分字符串
 	 * @param str 被切分的字符串
@@ -1101,7 +1101,7 @@ public class StringUtils {
 			list.add(str);
 			return list;
 		}
-		
+
 		boolean isNotEnd = true;	//未结束切分的标志
 		int strLen = str.length();
 		StringBuilder sb = new StringBuilder(strLen);
@@ -1111,7 +1111,7 @@ public class StringUtils {
 				list.add(sb.toString());
 				//清空StringBuilder
 				sb.delete(0, sb.length());
-				
+
 				//当达到切分上限-1的量时，将所剩字符全部作为最后一个串
 				if(limit !=0 && list.size() == limit-1) {
 					isNotEnd = false;
@@ -1123,7 +1123,7 @@ public class StringUtils {
 		list.add(sb.toString());
 		return list;
 	}
-	
+
 	/**
 	 * 切分字符串<br>
 	 * from jodd
@@ -1138,7 +1138,7 @@ public class StringUtils {
 		if(str.trim().length() == 0) {
 			return new String[]{str};
 		}
-		
+
 		int dellen = delimiter.length();	//del length
 		int maxparts = (str.length() / dellen) + 2;		// one more for the last
 		int[] positions = new int[maxparts];
@@ -1161,7 +1161,7 @@ public class StringUtils {
 		}
 		return result;
 	}
-	
+
 	/**
 	 * 将驼峰式命名的字符串转换为下划线方式。如果转换前的驼峰式命名的字符串为空，则返回空字符串。</br>
 	 * 例如：HelloWorld->hello_world
@@ -1196,7 +1196,7 @@ public class StringUtils {
 		}
 		return sb.toString();
 	}
-	
+
 	/**
 	 * 将下划线方式命名的字符串转换为驼峰式。如果转换前的下划线大写方式命名的字符串为空，则返回空字符串。</br>
 	 * 例如：hello_world->HelloWorld
@@ -1242,7 +1242,7 @@ public class StringUtils {
 		}
 		return new String(result);
 	}
-	
+
 	/**
 	 * 给定字符串转换字符编码<br/>
 	 * 如果参数为空，则返回原字符串，不报错。
@@ -1266,13 +1266,13 @@ public class StringUtils {
 	 * 基本变量类型的枚举
 	 */
 	private static enum BASIC_TYPE {
-		BYTE("byte"), 
-		SHORT("short"), 
-		INT("int"), 
-		LONG("long"), 
-		DOUBLE("double"), 
-		FLOAT("float"), 
-		BOOLEAN("boolean"), 
+		BYTE("byte"),
+		SHORT("short"),
+		INT("int"),
+		LONG("long"),
+		DOUBLE("double"),
+		FLOAT("float"),
+		BOOLEAN("boolean"),
 		CHAR("char"),
 		CHARACTER("character"),
 		STRING("string");

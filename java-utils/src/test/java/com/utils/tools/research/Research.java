@@ -2,7 +2,6 @@ package com.utils.tools.research;
 
 import com.utils.tools.research.mapper.MsgMapper;
 import com.utils.tools.research.pojo.Msg;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
@@ -15,7 +14,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @SpringBootTest
-@Ignore
 public class Research {
 
     @Autowired

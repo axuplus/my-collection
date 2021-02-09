@@ -1,4 +1,4 @@
-package com.utils.util.base;
+package com.collection.utils.util.base;
 
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;

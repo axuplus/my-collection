@@ -1,12 +1,15 @@
 package com.utils;
 
+import com.utils.util.support.GlobalExceptionHandler;
+import com.utils.util.swagger.SwaggerConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.SpringCloudApplication;
-import tk.mybatis.spring.annotation.MapperScan;
+import org.springframework.context.annotation.Import;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
 
 @SpringBootApplication
-@MapperScan(basePackages = {"com.utils.research.mapper"})
+@EnableSwagger2
 public class UtilsApplication {
 
     public static void main(String[] args) {

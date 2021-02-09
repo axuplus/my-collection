@@ -2,9 +2,9 @@ package com.utils.tools.login;
 
 public interface UacLoginTokenService {
 
-    UacLoginTokenVo generateToken(UacUser uacUser);
+    com.utils.tools.login.UacLoginTokenVo generateToken(com.utils.tools.login.UacUser uacUser);
 
-    UacLoginTokenVo refreshToken(Long userId);
+    com.utils.tools.login.UacLoginTokenVo refreshToken(Long userId);
 
     void deleteToken(Long userId);
 

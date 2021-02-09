@@ -14,6 +14,8 @@ public enum ErrorCodeEnum {
 
     GL99990401(9999401, "无访问权限"),
 
+    GL500(500, "未知异常"),
+
     UAC10011041(10011041, "token已过期,请重新登录");
 
     private int code;

@@ -1,16 +1,17 @@
 package com.utils.util;
 
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
+//import sun.misc.BASE64Decoder; jdk1.8
+//import sun.misc.BASE64Encoder;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import java.security.Key;
 import java.security.SecureRandom;
+import java.util.Base64;
 
 /**
  * base64数据加解密
- * */
+ */
 public class Encrypt {
 
     private static String DES_ALGORITHM = "DES";
@@ -41,16 +42,20 @@ public class Encrypt {
         byte[] byteMi = null;
         byte[] byteMing = null;
         String strMi = "";
-        BASE64Encoder base64en = new BASE64Encoder();
+
+        Base64.Encoder encoder = Base64.getEncoder();
+        // BASE64Encoder base64en = new BASE64Encoder();
         try {
             byteMing = strMing.getBytes("UTF-8");
             byteMi = Encrypt.encryptByte(byteMing);
-            strMi = base64en.encode(byteMi);
+            //strMi = base64en.encode(byteMi);
+            strMi = encoder.encodeToString(byteMi);
+
         } catch (Exception e) {
             throw new RuntimeException(
                     "Error initializing SqlMap class. Cause: " + e);
         } finally {
-            base64en = null;
+            encoder = null;
             byteMing = null;
             byteMi = null;
         }
@@ -64,20 +69,22 @@ public class Encrypt {
      * @return
      */
     public static String decode(String strMi) {
-        BASE64Decoder base64De = new BASE64Decoder();
+        Base64.Decoder decoder = Base64.getDecoder();
+        //BASE64Decoder base64De = new BASE64Decoder();
         System.out.println(strMi.getBytes().length);
         byte[] byteMing = null;
         byte[] byteMi = null;
         String strMing = "";
         try {
-            byteMi = base64De.decodeBuffer(strMi);
-            byteMing = Encrypt.decryptByte(byteMi);
+            //byteMi = base64De.decodeBuffer(strMi);
+            byte[] result = decoder.decode(strMi);
+            byteMing = Encrypt.decryptByte(result);
             strMing = new String(byteMing, "UTF-8");
         } catch (Exception e) {
             throw new RuntimeException(
                     "Error initializing SqlMap class. Cause: " + e);
         } finally {
-            base64De = null;
+            decoder = null;
             byteMing = null;
             byteMi = null;
         }
@@ -117,7 +124,7 @@ public class Encrypt {
         byte[] byteFina = null;
         try {
             cipher = Cipher.getInstance(DES_ALGORITHM);
-            cipher.init(Cipher.DECRYPT_MODE,getKey("3GIASI359NSKLVIXKZUSDJISU2NK4INB"));
+            cipher.init(Cipher.DECRYPT_MODE, getKey("3GIASI359NSKLVIXKZUSDJISU2NK4INB"));
             byteFina = cipher.doFinal(byteD);
         } catch (Exception e) {
             throw new RuntimeException(
@@ -132,15 +139,16 @@ public class Encrypt {
     /**
      * 当出现乱码问题时,用来检测字符串是什么编码
      * 目前只测试"ISO8859-1","GBK","UTF-8"3种编码的组合
-     * @return from解密编码,to加密编码
+     *
+     * @return from解密编码, to加密编码
      */
-    public static void checkEncode(String text){
-        String[] encode = {"ISO8859-1","GBK","UTF-8"};
+    public static void checkEncode(String text) {
+        String[] encode = {"ISO8859-1", "GBK", "UTF-8"};
         try {
             for (int i = 0; i < encode.length; i++) {
                 for (int j = 0; j < encode.length; j++) {
-                    System.out.println("from"+encode[i]+",to:"+encode[j]+"="+
-                            new String(text.getBytes(encode[i]),encode[j]));
+                    System.out.println("from" + encode[i] + ",to:" + encode[j] + "=" +
+                            new String(text.getBytes(encode[i]), encode[j]));
                 }
             }
         } catch (Exception e) {
@@ -149,7 +157,6 @@ public class Encrypt {
     }
 
     /**
-     *
      * @param args
      * @throws Exception
      */

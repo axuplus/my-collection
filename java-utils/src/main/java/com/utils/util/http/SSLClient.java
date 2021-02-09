@@ -12,7 +12,7 @@ import javax.net.ssl.X509TrustManager;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 
-
+@SuppressWarnings({"all"})
 public class SSLClient extends DefaultHttpClient {
     //用于进行Https请求的HttpClient
     public SSLClient()  throws Exception {
