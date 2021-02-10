@@ -23,16 +23,18 @@ public class BinarySearch {
     }
 
     public static int binarySearchB(int[] array, int key) {
-        int low = 0;
-        int high = array.length - 1;
-        while (low <= high) {
-            int mid = low + (high - low) / 2;
-            if (array[mid] > key) {
-                high = mid - 1;
-            } else if (array[mid] < key) {
-                low = mid + 1;
+        int i = 0;
+        int j = array.length - 1;
+        while (i <= j) {
+            int mid = (i + j) / 2;
+            int midValue = array[mid];
+            if (midValue > key) {
+                j = mid - 1;
+            } else if (midValue < key) {
+                i = mid + 1;
+            } else {
+                return mid;
             }
-            return mid;
         }
         return -1;
     }
