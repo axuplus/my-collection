@@ -5,33 +5,44 @@ public class LeeCode21 {
 
     }
 
-    static ListNode mergeList(ListNode k1, ListNode k2) {
-        if (k1 == null) return k2;
-        if (k2 == null) return k1;
+    /**
+     *  合并两个有序链表
+     * @param l1
+     * @param l2
+     * @return
+     */
+    static ListNode mergeList(ListNode l1, ListNode l2) {
+        if (l1 == null) return l2;
+        if (l2 == null) return l1;
 
         ListNode head;
-        // 判断两个k1,k2哪个小
-        if (k1.val <= k2.val) {
-            head = k1;
-            k1 = k1.next;
+
+        if (l1.val <= l2.val) {
+            head = l1;
+            l1 = l1.next;
         } else {
-            head = k2;
-            k2 = k2.next;
+            head = l2;
+            l2 = l2.next;
         }
+        // 临时指针用来记录head当前的情况
         ListNode curr = head;
-        while (k1 != null && k2 != null) {
-            if (k1.val <= k2.val) {
-                curr = curr.next = k1;
-                k1 = k1.next;
+        // 指向另外一个链表的头节点
+        while (l1 != null && l2 != null) {
+            if (l1.val <= l2.val) {
+                curr = curr.next = l1;
+                l1 = l1.next;
             } else {
-                curr = curr.next = k2;
-                k2 = k2.next;
+                curr = curr.next = l2;
+                l2 = l2.next;
             }
         }
-        // k1跟k2长度不一样，其中一个提前空了
-        if (k1 == null) curr.next = k2;
-        if (k2 == null) curr.next = k1;
-
+        // 其中一条链表提前空了则直接指向另外一条链表，剩余部分都是有序的
+        if (l1 == null) {
+            curr.next = l2;
+        }
+        if (l2 == null) {
+            curr.next = l1;
+        }
         return head;
     }
 }

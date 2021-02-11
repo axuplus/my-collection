@@ -7,8 +7,11 @@ public class LeeCode141 {
     public static void main(String[] args) {
 
     }
+
     /**
-     * 判断链表是否有回环
+     *  判断链表是否有回环
+     * @param head
+     * @return
      */
     public boolean hasCycle(ListNode head) {
         Set<ListNode> set = new HashSet<>();

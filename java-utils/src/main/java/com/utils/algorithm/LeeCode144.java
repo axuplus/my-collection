@@ -10,6 +10,11 @@ public class LeeCode144 {
 
     }
 
+    /**
+     *  二叉树前序遍历
+     * @param root
+     * @return
+     */
     static List<Integer> prevOrder(TreeNode root) {
         List<Integer> list = new ArrayList<>();
         if (root == null) return list;

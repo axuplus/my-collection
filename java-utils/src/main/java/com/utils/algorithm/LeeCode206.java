@@ -6,9 +6,10 @@ public class LeeCode206 {
     }
 
     /**
-     * 反转链表
+     *  翻转单个链表
+     * @param head
+     * @return
      */
-
     static ListNode reverseList(ListNode head) {
         if (head == null || head.next == null) {
             return head;
@@ -23,7 +24,7 @@ public class LeeCode206 {
             prev = curr;
             curr = next;
         }
-        // 3:修改头节点，将头节点的next指针指向空
+        // 3:修改头节点，将头节点的next指针指向空(防止出现链表回环)
         head.next = null;
 
         return prev;
