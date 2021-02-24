@@ -6,7 +6,8 @@ public class LeeCode206 {
     }
 
     /**
-     *  翻转单个链表
+     * 翻转单个链表
+     *
      * @param head
      * @return
      */
@@ -26,7 +27,6 @@ public class LeeCode206 {
         }
         // 3:修改头节点，将头节点的next指针指向空(防止出现链表回环)
         head.next = null;
-
         return prev;
     }
 }
